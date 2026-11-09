@@ -1,0 +1,17 @@
+{
+  "name": "dd-claude-plugins",
+  "owner": {
+    "name": "JustDud",
+    "url": "https://github.com/JustDud"
+  },
+  "metadata": {
+    "description": "Claude Code plugins for keeping AI-written codebases clean: automated maintenance, reviewer agents and shared commands."
+  },
+  "plugins": [
+    {
+      "name": "dd-cleanup",
+      "source": "./plugins/dd-cleanup",
+      "description": "Scheduled and on-demand AI cleanup: static tools find candidates, one fixer, a build/analyzer/test gate, three reviewers and a verifier, then a draft PR."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+# .github/workflows/dd-cleanup.yml - nightly dd-cleanup run (weekdays 03:17 UTC)
+# Check input names against the current anthropics/claude-code-action README before relying on it.
+name: dd-cleanup
+on:
+  schedule:
+    - cron: "17 3 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      category:
+        description: "Category (blank = pick by weekday)"
+        required: false
+        default: ""
+concurrency:
+  group: dd-cleanup
+  cancel-in-progress: false
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 100
+      # Install the project's dependencies (edit for your stack)
+      - uses: actions/setup-node@v4
+        if: hashFiles('package.json') != ''
+        with: { node-version: 22 }
+      - run: npm ci
+        if: hashFiles('package-lock.json') != ''
+      - uses: astral-sh/setup-uv@v5
+        if: hashFiles('pyproject.toml') != ''
+      - run: uv sync
+        if: hashFiles('uv.lock') != ''
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}   # or: claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          plugin_marketplaces: "https://github.com/JustDud/dd-claude-plugins.git"
+          plugins: "dd-cleanup@dd-claude-plugins"
+          prompt: "/dd-cleanup:run ${{ github.event.inputs.category }}"
+          claude_args: >-
+            --max-turns 80
+            --allowedTools "Read,Grep,Glob,Edit,Write,Task,Bash"

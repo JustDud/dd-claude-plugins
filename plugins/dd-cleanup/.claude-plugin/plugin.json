@@ -1,0 +1,19 @@
+{
+  "name": "dd-cleanup",
+  "version": "0.1.0",
+  "description": "Automated codebase maintenance pipeline: dead code, duplicates, simplification and health checks, gated by tests and reviewer agents.",
+  "author": {
+    "name": "JustDud",
+    "url": "https://github.com/JustDud"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/JustDud/dd-claude-plugins",
+  "keywords": [
+    "cleanup",
+    "dead-code",
+    "duplicates",
+    "refactoring",
+    "code-review",
+    "maintenance"
+  ]
+}
