@@ -1,0 +1,12 @@
+{
+  "name": "dd-review",
+  "version": "0.1.0",
+  "description": "Post-feature review for AI-built changes: deterministic gate, end-to-end verification against the spec, one wave of role-scoped reviewers, a cross-model refuter, one guarded fix pass and a scoped re-check.",
+  "author": {
+    "name": "JustDud",
+    "url": "https://github.com/JustDud"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/JustDud/dd-claude-plugins",
+  "keywords": ["code-review", "verification", "subagents", "testing", "e2e", "pull-request"]
+}
